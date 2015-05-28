@@ -1,9 +1,12 @@
 package chclient
 
 import (
+	"crypto/tls"
+	"errors"
 	"fmt"
 	"io"
 	"net"
+	"net/http"
 	"net/url"
 	"regexp"
 	"strings"
@@ -111,6 +114,98 @@ func (c *Client) Start() {
 	go c.start()
 }
 
+type dialer struct {
+  conn net.Conn
+}
+
+func (d *dialer) dial(network, addr string) (net.Conn, error) {
+  conn, err := net.Dial(network, addr)
+  d.conn = conn
+  return d.conn, err
+}
+
+// connnect ws, wss and wss via proxy w/ or w/o valid certificate
+func (c *Client) wsdial(protocol, origin string, skipVerify bool) (ws *websocket.Conn, err error) {
+	// prepare some state
+
+	useTls := strings.HasPrefix(c.server, "wss")
+
+	req, err := http.NewRequest("GET", c.server, nil)
+	if err != nil {
+		return nil, err
+	}
+	proxy, err := http.ProxyFromEnvironment(req)
+	if err != nil {
+		return nil, err
+	}
+
+	wsConfig, err := websocket.NewConfig(c.server, origin)
+	if err != nil {
+		return nil, err
+	}
+	if useTls && skipVerify {
+		wsConfig.TlsConfig = &tls.Config{InsecureSkipVerify: true}
+	}
+
+	targetUrl, err := url.Parse(c.server)
+	if err != nil {
+		return nil, err
+	}
+
+	targetHost, _, err :=  net.SplitHostPort(targetUrl.Host)
+	if err != nil {
+		return nil, err
+	}
+
+	// lets do the work
+
+	if proxy == nil {
+		// the easy part
+		return websocket.DialConfig(wsConfig)
+	}
+
+	// NOTE: only supporting http proxy
+	if ! strings.HasPrefix(proxy.String(), "http:") {
+		return nil, errors.New("unsupported proxy protocol")
+	}
+	// the dammed proxy stuff
+	if useTls {
+		// wss access through proxy
+		d := &dialer{}
+		hc := &http.Client{
+			Transport: &http.Transport{
+				Dial: d.dial,
+			},
+		}
+		req, err = http.NewRequest("CONNECT", proxy.String(), nil)
+		if err != nil {
+			return nil, err
+		}
+		req.Host = targetUrl.Host
+	  req.Header.Set("Host", targetUrl.Host)
+	  req.Header.Set("Proxy-Connection", "Keep-Alive")
+
+		_, err := hc.Do(req)
+		if err != nil {
+			return nil, err
+		}
+		tlsConfig := &tls.Config{}
+		if skipVerify {
+			tlsConfig.InsecureSkipVerify = true
+		} else {
+			tlsConfig.ServerName = targetHost
+		}
+		conn := tls.Client(d.conn, tlsConfig)
+		return websocket.NewClient(wsConfig, conn)
+
+	} else {
+		return nil, errors.New("ws over proxy not implemented, use wss instead")
+		// ws access through proxy
+		// TODO: implement
+
+	}
+}
+
 func (c *Client) start() {
 	c.Infof("Connecting to %s\n", c.server)
 
@@ -147,8 +242,11 @@ func (c *Client) start() {
 			time.Sleep(d)
 		}
 
-		ws, err := websocket.Dial(c.server, chshare.ProtocolVersion, "http://localhost/")
+   	// TODO: support --skip-ssl-validation
+		ws, err := c.wsdial(chshare.ProtocolVersion, "http://localhost", true)
+
 		if err != nil {
+			c.Infof("Failed to connect: %v", err)
 			connerr = err
 			continue
 		}

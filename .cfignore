@@ -1,1 +1,4 @@
-chisel-bin/*
+/tmp/*
+/bin/*
+/crosscompile.sh
+/chisel

@@ -120,6 +120,8 @@ func (s *Server) Close() error {
 
 func (s *Server) handleHTTP(w http.ResponseWriter, r *http.Request) {
 	//websockets upgrade AND has chisel prefix
+	header,_ := httputil.DumpRequest(r, false)
+	s.Infof("Request Header %s", header)
 	if r.Header.Get("Upgrade") == "websocket" &&
 		r.Header.Get("Sec-WebSocket-Protocol") == chshare.ProtocolVersion {
 		s.wsServer.ServeHTTP(w, r)
