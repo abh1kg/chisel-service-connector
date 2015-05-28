@@ -8,11 +8,11 @@
 		},
 		{
 			"ImportPath": "golang.org/x/crypto/ssh",
-			"Rev": "c57d4a71915a248dbad846d60825145062b4c18e"
+			"Rev": "ce6bda69189e9f4ff278a5e181691cd695f753ae"
 		},
 		{
 			"ImportPath": "golang.org/x/net/websocket",
-			"Rev": "7dbad50ab5b31073856416cdcfeb2796d682f844"
+			"Rev": "621fff363a1d9ad7fdd0bfa9d80a42881267deb4"
 		}
 	]
 }
