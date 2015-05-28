@@ -4,7 +4,7 @@ import (
 	"io"
 	"net"
 
-	"github.com/morikat/chisel/share"
+	"github.wdf.sap.corp/cloudfoundry/chisel/share"
 )
 
 type Proxy struct {

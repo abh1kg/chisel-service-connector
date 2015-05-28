@@ -24,7 +24,7 @@ import (
 	"path"
 	"strconv"
 
-	"github.com/morikat/chisel/share"
+	"github.wdf.sap.corp/cloudfoundry/chisel/share"
 
 	"time"
 )
