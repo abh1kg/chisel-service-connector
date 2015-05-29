@@ -18,4 +18,5 @@ function run_local {
 }
 
 echo "compiling chisel for platform $OSARCH into directory $OUTDIR"
-run_in_docker
+#run_in_docker
+run_local
