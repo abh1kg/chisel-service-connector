@@ -146,6 +146,9 @@ func (c *Client) wsdial(protocol, origin string, skipVerify bool) (ws *websocket
 	if useTls && skipVerify {
 		wsConfig.TlsConfig = &tls.Config{InsecureSkipVerify: true}
 	}
+	if protocol != "" {
+		wsConfig.Protocol = []string{protocol}
+	}
 
 	targetUrl, err := url.Parse(c.server)
 	if err != nil {
