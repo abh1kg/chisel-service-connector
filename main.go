@@ -176,6 +176,9 @@ var clientHelp = `
     in the form: "<user>:<pass>". These credentials are compared to
     the credentials inside the server's --authfile.
 
+    --skip-ssl-validation, If specified wss and https connections do not
+    validate certificates.
+
     --keepalive, An optional keepalive interval. Since the underlying
     transport is HTTP, in many instances we'll be traversing through
     proxies, often these proxies will close idle connections. You must
@@ -189,6 +192,7 @@ func client(args []string) {
 
   fingerprint := flags.String("fingerprint", "", "")
   auth := flags.String("auth", "", "")
+  skipSslValidation := flags.Bool("skip-ssl-validation", false, "")
   keepalive := flags.Duration("keepalive", 0, "")
   verbose := flags.Bool("v", false, "")
   flags.Usage = func() {
@@ -203,11 +207,12 @@ func client(args []string) {
   }
 
   c, err := chclient.NewClient(&chclient.Config{
-    Fingerprint: *fingerprint,
-    Auth:        *auth,
-    KeepAlive:   *keepalive,
-    Server:      args[0],
-    Remotes:     args[1:],
+    Fingerprint:        *fingerprint,
+    Auth:               *auth,
+    KeepAlive:          *keepalive,
+    SkipSslValidation:  *skipSslValidation,
+    Server:             args[0],
+    Remotes:            args[1:],
   })
   if err != nil {
     log.Fatal(err)

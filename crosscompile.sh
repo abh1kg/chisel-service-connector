@@ -2,7 +2,7 @@
 
 OSARCH="linux/amd64 darwin/amd64 windows/amd64"
 OUTDIR="bin"
-OUTPUT="$OUTDIR/{{.OS}}_{{.Arch}}_{{.Dir}}"
+OUTPUT="$OUTDIR/{{.Dir}}_{{.OS}}_{{.Arch}}"
 
 function run_in_docker {
   docker run --rm -v "$(pwd)":/usr/src/chisel -w /usr/src/chisel \
@@ -12,8 +12,10 @@ function run_in_docker {
 }
 
 function run_local {
-  go get "github.com/mitchell/gox"
-  gox -build-toolchain
+  if ! which gox > /dev/null; then
+    go get "github.com/mitchell/gox"
+    gox -build-toolchain
+  fi
   gox -osarch="$OSARCH" -output="$OUTPUT"
 }
 

@@ -19,12 +19,13 @@ import (
 )
 
 type Config struct {
-	shared      *chshare.Config
-	Fingerprint string
-	Auth        string
-	KeepAlive   time.Duration
-	Server      string
-	Remotes     []string
+	shared            *chshare.Config
+	Fingerprint       string
+	Auth              string
+	KeepAlive         time.Duration
+  SkipSslValidation bool
+	Server            string
+	Remotes           []string
 }
 
 type Client struct {
@@ -125,7 +126,7 @@ func (d *dialer) dial(network, addr string) (net.Conn, error) {
 }
 
 // connnect ws, wss and wss via proxy w/ or w/o valid certificate
-func (c *Client) wsdial(protocol, origin string, skipVerify bool) (ws *websocket.Conn, err error) {
+func (c *Client) wsdial(protocol, origin string) (ws *websocket.Conn, err error) {
 	// prepare some state
 
 	useTls := strings.HasPrefix(c.server, "wss")
@@ -143,7 +144,7 @@ func (c *Client) wsdial(protocol, origin string, skipVerify bool) (ws *websocket
 	if err != nil {
 		return nil, err
 	}
-	if useTls && skipVerify {
+	if useTls && c.config.SkipSslValidation {
 		wsConfig.TlsConfig = &tls.Config{InsecureSkipVerify: true}
 	}
 	if protocol != "" {
@@ -193,7 +194,7 @@ func (c *Client) wsdial(protocol, origin string, skipVerify bool) (ws *websocket
 			return nil, err
 		}
 		tlsConfig := &tls.Config{}
-		if skipVerify {
+		if c.config.SkipSslValidation {
 			tlsConfig.InsecureSkipVerify = true
 		} else {
 			tlsConfig.ServerName = targetHost
@@ -246,7 +247,7 @@ func (c *Client) start() {
 		}
 
    	// TODO: support --skip-ssl-validation
-		ws, err := c.wsdial(chshare.ProtocolVersion, "http://localhost", true)
+		ws, err := c.wsdial(chshare.ProtocolVersion, "http://localhost")
 
 		if err != nil {
 			c.Infof("Failed to connect: %v", err)

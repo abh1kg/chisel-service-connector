@@ -134,12 +134,15 @@ and then visit [localhost:3000](http://localhost:3000/), we should see a directo
 
 	  --fingerprint, An optional fingerprint (server authentication)
 	  string to compare against the server's public key. You may provide
-	  just a prefix of the key or the entire string. Fingerprint 
+	  just a prefix of the key or the entire string. Fingerprint
 	  mismatches will close the connection.
 
 	  --auth, An optional username and password (client authentication)
 	  in the form: "<user>:<pass>". These credentials are compared to
 	  the credentials inside the server's --authfile.
+
+    --skip-ssl-validation, If specified wss and https connections do not
+    validate certificates.
 
 	  --keepalive, An optional keepalive interval. Since the underlying
 	  transport is HTTP, in many instances we'll be traversing through
