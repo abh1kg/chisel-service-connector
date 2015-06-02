@@ -1,1 +1,1 @@
-web: chisel server --port $PORT
+web: chisel server --port $PORT --authfile auth.json 
