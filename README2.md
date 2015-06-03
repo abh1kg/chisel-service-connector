@@ -8,12 +8,12 @@ Chisel is an HTTP client and server which acts as a TCP proxy, written in Go (Go
 
 **Binaries**
 
-See [Releases](https://github.com/jpillora/chisel/releases/latest)
+See [bin](bin)
 
 **Source**
 
 ``` sh
-$ go get -v github.com/jpillora/chisel
+$ go get -v github.wdf.sap.corp/cloudfoundry/chisel
 ```
 
 ### Features
@@ -22,28 +22,9 @@ $ go get -v github.com/jpillora/chisel
 * [Performant](#performance)*
 * [Encrypted connections](#security) using `crypto/ssh`
 * [Authenticated connections](#authentication), authenticate clients with a users config file, authenticate servers with fingerprint matching.
-* Client auto-reconnects with [exponential backoff](https://github.com/jpillora/backoff)
+* Client auto-reconnects with [exponential backoff](https://github.com/morikat/backoff)
 * Client can create multiple tunnel endpoints over one TCP connection
 * Server optionally doubles as a [reverse proxy](http://golang.org/pkg/net/http/httputil/#NewSingleHostReverseProxy)
-
-### Demo
-
-A [demo app](https://chisel-demo.herokuapp.com) on Heroku is running this `chisel server`:
-
-``` sh
-$ chisel server --port $PORT --proxy http://example.com
-# listens on $PORT, proxy web requests to 'http://example.com'
-```
-
-This demo app is also running a [simple file server](https://www.npmjs.com/package/serve) on `:3000`, which is normally inaccessible due to Heroku's firewall. However, if we tunnel in with:
-
-``` sh
-$ chisel client https://chisel-demo.herokuapp.com 3000
-# connects to 'https://chisel-demo.herokuapp.com',
-# tunnels your localhost:3000 to the server's localhost:3000
-```
-
-and then visit [localhost:3000](http://localhost:3000/), we should see a directory listing of the demo app's root. Also, if we visit the [demo app](https://chisel-demo.herokuapp.com) in the browser we should hit the server's default proxy and see a copy of [example.com](http://example.com).
 
 ### Usage
 
@@ -59,7 +40,7 @@ and then visit [localhost:3000](http://localhost:3000/), we should see a directo
     client - runs chisel in client mode
 
   Read more:
-    https://github.com/jpillora/chisel
+    https://github.com/morikat/chisel
 
 ```
 </tmpl>
@@ -99,7 +80,7 @@ and then visit [localhost:3000](http://localhost:3000/), we should see a directo
     --help, This help text
 
   Read more:
-    https://github.com/jpillora/chisel
+    https://github.com/morikat/chisel
 
 ```
 </tmpl>
@@ -155,7 +136,7 @@ and then visit [localhost:3000](http://localhost:3000/), we should see a directo
     --help, This help text
 
   Read more:
-    https://github.com/jpillora/chisel
+    https://github.com/morikat/chisel
 
 ```
 </tmpl>
