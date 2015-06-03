@@ -5,8 +5,11 @@ It has been enhanced even work behind a proxy
 and to deal with self signed certificates.
 
 Chisel is an HTTP client and server which acts as a TCP proxy, written in Go (Golang).
-On CloudFoundry it can be used to map TCP endpoits of your backing service to your
+On CloudFoundry it can be used to map TCP endpoits of your backing services to your
 local workstation. It provides binaries for 64 bit OSX, Windows and Linux.
+
+NOTE: use this feature with care and only in the intended way to access your backing
+services. You need to understand the security relevance of that feature.
 
 ### How to use
 
@@ -86,4 +89,17 @@ your application.
 
 * Although, access to the chisel app is secured and protected by password
   you should for security reasons delte the chisel app if you don't use it anymore.
+
+### Trouble Shooting
+
+When using a proxy you neet to access the chisel up via https.
+
+In case you use self signed certificates on your application route, you need to
+skip strict ssl validation:
+``` sh
+  chisel --skip-ssl-validation ...
+```
+
+You might also look into [README2](README2.md) for further details.
+
 
