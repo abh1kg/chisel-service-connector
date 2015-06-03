@@ -90,16 +90,31 @@ your application.
 * Although, access to the chisel app is secured and protected by password
   you should for security reasons delte the chisel app if you don't use it anymore.
 
-### Trouble Shooting
+### Advanced
 
-When using a proxy you neet to access the chisel up via https.
+When using a proxy you neet to access the chisel up via https. This is because
+most proxies do not handle ws connections correctly. If there is no proxy in
+between you can use http access to the chisel server as well. All data
+send over the forwarded port is still encrypted, even if the websocket connection
+itself is not encrypted.
 
 In case you use self signed certificates on your application route, you need to
 skip strict ssl validation:
 ``` sh
-  chisel --skip-ssl-validation ...
+  chisel client --skip-ssl-validation ...
 ```
+Several portforwardings can be multiplexed onto a single websocket connection.
+I.e.:
+``` sh
+  chisel client --auth <user>:<password> https://<chisel-server> \
+    <local_port_1>:<remote_host_1>:<remote_port_1> \
+    <local_port_2>:<remote_host_2>:<remote_port_2>
+```
+This will forward two remote ports to your local workstation using one and the
+same websocket connection.
 
 You might also look into [README2](README2.md) for further details.
+
+
 
 
