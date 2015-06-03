@@ -29,7 +29,7 @@ your application.
 ```
 * Bind your backing service to the chisel app.
 ``` sh
-  cf bind-service my-backing-service my-chisel-app
+  cf bind-service my-chisel-app my-backing-service
 ```
 * Start the chisel app.
 ``` sh
