@@ -72,7 +72,7 @@ your application.
 ```
 * Use the binary for your platform in bin folder to start the chisel client.
 ``` sh
-  bin/chisel_linux-amd64 client --auth my-user:my-secret 12345:10.78.148.124:32764
+  bin/chisel_linux-amd64 <url_to_chisel_server_app> client --auth my-user:my-secret 12345:10.78.148.124:32764
 ```
   Where the connect string `12345:10.78.148.124:32764` defines the local port
   on your work station (i.e. `12345`), the host running your service
