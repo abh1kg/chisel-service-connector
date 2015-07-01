@@ -23,9 +23,12 @@ your application.
   git clone https://github.com/morikat/chisel.git
   cd chisel
 ```
-* For security reasons you should *always* use authenticated connection. Therefor
-  you should copy `auth.json.example` to `auth.json`. Edit `auth.json`
-  and adapt `user` and `secret`.
+* For security reasons you should *always* use authenticated connection.
+  Create a file `auth.json` in the root directory of this project for user
+  `myuser` and password `mysecret` like this:
+```sh
+  echo '{ "myuser:mysecret": [""] }' > auth.json
+```
 * Push the chisel app under a free name
 ``` sh
   cf push my-chisel-app --no-start
