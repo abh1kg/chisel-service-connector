@@ -20,7 +20,7 @@ your application.
 
 * clone the chisel repository to your local workstation
 ``` sh
-  git clone https://github.com/morikat/chisel.git
+  git clone https://github.cwdf.sap.corp/cloudfoundry/chisel.git
   cd chisel
 ```
 * For security reasons you should *always* use authenticated connection.
