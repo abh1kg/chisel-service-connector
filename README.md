@@ -75,7 +75,7 @@ your application.
 ```
 * Use the binary for your platform in bin folder to start the chisel client.
 ``` sh
-  bin/chisel_linux_amd64 client --auth my-user:my-secret https://<url_to_chisel_server_app> 12345:10.78.148.124:32764
+  bin/chisel_windows_amd64 client --auth my-user:my-secret https://<url_to_chisel_server_app> localhost:12345:10.78.148.124:32764
 ```
   Where the connect string `12345:10.78.148.124:32764` defines the local port
   on your work station (i.e. `12345`), the host running your service
@@ -110,8 +110,8 @@ Several portforwardings can be multiplexed onto a single websocket connection.
 I.e.:
 ``` sh
   chisel client --auth <user>:<password> https://<chisel-server> \
-    <local_port_1>:<remote_host_1>:<remote_port_1> \
-    <local_port_2>:<remote_host_2>:<remote_port_2>
+    localhost:<local_port_1>:<remote_host_1>:<remote_port_1> \
+    localhost:<local_port_2>:<remote_host_2>:<remote_port_2>
 ```
 This will forward two remote ports to your local workstation using one and the
 same websocket connection.

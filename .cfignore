@@ -1,4 +1,2 @@
 /tmp/*
 /bin/*
-/crosscompile.sh
-/chisel
