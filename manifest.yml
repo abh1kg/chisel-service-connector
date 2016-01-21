@@ -1,3 +1,6 @@
 ---
 applications:
-- memory: 64M
+- name: chisel
+  memory: 64M
+  buildpack: binary_buildpack
+
