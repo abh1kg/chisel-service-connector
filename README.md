@@ -77,7 +77,7 @@ your application.
 ``` sh
   bin/chisel_windows_amd64 client --auth my-user:my-secret https://<url_to_chisel_server_app> localhost:12345:10.78.148.124:32764
 ```
-  Where the connect string `12345:10.78.148.124:32764` defines the local port
+  Where the connect string `localhost:12345:10.78.148.124:32764` defines the local port
   on your work station (i.e. `12345`), the host running your service
   (i.e. `10.78.148.124`) and the port to connect to your service
   (i.e. `32764`). The auth user and secret must match your settings in
