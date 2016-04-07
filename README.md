@@ -29,6 +29,10 @@ your application.
 ```sh
   echo '{ "myuser:mysecret": [""] }' > auth.json
 ```
+  Note for DOS users: Remove the single quotes when you run this in a dos shell:
+```cmd
+  echo { "myuser:mysecret": [""] } > auth.json
+```
 * Push the chisel app under a free name
 ``` sh
   cf push my-chisel-app --no-start
