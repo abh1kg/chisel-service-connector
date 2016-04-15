@@ -20,7 +20,7 @@ your application.
 
 * clone the chisel repository to your local workstation
 ``` sh
-  git clone https://github.wdf.sap.corp/cloudfoundry/chisel.git
+  git clone https://github.infra.hana.ondemand.com/cloudfoundry/chisel.git
   cd chisel
 ```
 * For security reasons you should *always* use authenticated connection.

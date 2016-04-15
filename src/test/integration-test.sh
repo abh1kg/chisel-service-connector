@@ -5,7 +5,7 @@ which pwgen || (echo missing pwgen; exit 1)
 which wget || (echo missing wget; exit 1)
 which cf || (echo missing cf; exit 1)
 
-repo=https://github.wdf.sap.corp/cloudfoundry/chisel.git
+repo=https://github.infra.hana.ondemand.com/cloudfoundry/chisel.git
 name=chisel
 appname=$(pwgen -N 1 -0)
 

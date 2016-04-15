@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.wdf.sap.corp/cloudfoundry/chisel",
+	"ImportPath": "github.infra.hana.ondemand.com/cloudfoundry/chisel",
 	"GoVersion": "go1.5.1",
 	"Deps": [
 		{

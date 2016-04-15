@@ -4,7 +4,7 @@ import (
 	"io"
 	"net"
 
-	"github.wdf.sap.corp/cloudfoundry/chisel/share"
+	"github.infra.hana.ondemand.com/cloudfoundry/chisel/share"
 )
 
 type Proxy struct {

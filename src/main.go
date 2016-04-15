@@ -6,8 +6,8 @@ import (
   "log"
   "os"
 
-  "github.wdf.sap.corp/cloudfoundry/chisel/client"
-  "github.wdf.sap.corp/cloudfoundry/chisel/server"
+  "github.infra.hana.ondemand.com/cloudfoundry/chisel/client"
+  "github.infra.hana.ondemand.com/cloudfoundry/chisel/server"
 )
 
 var VERSION string = "0.0.0-src" //set via ldflags
@@ -22,7 +22,7 @@ var help = `
     client - runs chisel in client mode
 
   Read more:
-    https://github.wdf.sap.corp/cloudfoundry/chisel
+    https://github.infra.hana.ondemand.com/cloudfoundry/chisel
 
 `
 
@@ -64,7 +64,7 @@ var commonHelp = `
     --help, This help text
 
   Read more:
-    https://github.wdf.sap.corp/cloudfoundry/chisel
+    https://github.infra.hana.ondemand.com/cloudfoundry/chisel
 
 `
 

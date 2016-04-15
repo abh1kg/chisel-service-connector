@@ -24,7 +24,7 @@ import (
 	"path"
 	"strconv"
 
-	"github.wdf.sap.corp/cloudfoundry/chisel/share"
+	"github.infra.hana.ondemand.com/cloudfoundry/chisel/share"
 
 	"time"
 )

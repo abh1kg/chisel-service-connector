@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"github.com/morikat/backoff"
-	"github.wdf.sap.corp/cloudfoundry/chisel/share"
+	"github.infra.hana.ondemand.com/cloudfoundry/chisel/share"
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/net/websocket"
 )

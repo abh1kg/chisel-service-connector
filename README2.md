@@ -13,7 +13,7 @@ See [bin](bin)
 **Source**
 
 ``` sh
-$ go get -v github.wdf.sap.corp/cloudfoundry/chisel
+$ go get -v github.infra.hana.ondemand.com/cloudfoundry/chisel
 ```
 
 ### Features
