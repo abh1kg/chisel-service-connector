@@ -1,8 +1,9 @@
 #!/bin/bash
 
 OSARCH="linux/amd64 darwin/amd64 windows/amd64"
-OUTDIR="bin"
-OUTPUT="$OUTDIR/{{.Dir}}_{{.OS}}_{{.Arch}}"
+ROOT=".."
+OUTDIR="$ROOT/bin"
+OUTPUT="$OUTDIR/chisel_{{.OS}}_{{.Arch}}"
 
 function run_in_docker {
   docker run --rm -v "$(pwd)":/usr/src/chisel -w /usr/src/chisel \
@@ -13,7 +14,7 @@ function run_in_docker {
 
 function run_local {
   if ! which gox > /dev/null; then
-    go get "github.com/mitchell/gox"
+    go get "github.com/mitchellh/gox"
     gox -build-toolchain
   fi
   gox -osarch="$OSARCH" -output="$OUTPUT"
@@ -22,3 +23,5 @@ function run_local {
 echo "compiling chisel for platform $OSARCH into directory $OUTDIR"
 #run_in_docker
 run_local
+mv $OUTDIR/chisel_linux_amd64 $ROOT/chisel
+ln -sf $ROOT/chisel $OUTDIR/chisel_linux_amd64 

@@ -1,6 +1,6 @@
 {
 	"ImportPath": "github.infra.hana.ondemand.com/cloudfoundry/chisel",
-	"GoVersion": "go1.5.1",
+	"GoVersion": "go1.5.2",
 	"Deps": [
 		{
 			"ImportPath": "github.com/morikat/backoff",
