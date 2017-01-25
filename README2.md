@@ -72,6 +72,8 @@ $ go get -v github.infra.hana.ondemand.com/cloudfoundry/chisel
       of address regular expressions for a match. Addresses will
       always come in the form "<host/ip>:<port>".
 
+    --authjson, See authfile
+
     --proxy, Specifies the default proxy target to use when chisel
     receives a normal HTTP request.
 
@@ -120,7 +122,7 @@ $ go get -v github.infra.hana.ondemand.com/cloudfoundry/chisel
 
     --auth, An optional username and password (client authentication)
     in the form: "<user>:<pass>". These credentials are compared to
-    the credentials inside the server's --authfile.
+    the credentials inside the server's --authfile / --authjson.
 
     --skip-ssl-validation, If specified wss and https connections do not
     validate certificates.
@@ -173,7 +175,7 @@ Encryption is always enabled. When you start up a chisel server, it will generat
 
 ### Authentication
 
-Using the `--authfile` option, the server may optionally provide a `user.json` configuration file to create a list of accepted users. The client then authenticates using the `--auth` option. See [users.json](example/users.json) for an example authentication configuration file. See the `--help` above for more information.
+Using the `--authfile` option, the server may optionally provide a `user.json` configuration file to create a list of accepted users. In addition it is possible to specify the JSON directly as a parameter via `--authjson`. The client then authenticates using the `--auth` option. See [users.json](example/users.json) for an example authentication configuration file. See the `--help` above for more information.
 
 Internally, this is done using the *Password* authentication method provided by SSH. Learn more about `crypto/ssh` here http://blog.gopheracademy.com/go-and-ssh/.
 
