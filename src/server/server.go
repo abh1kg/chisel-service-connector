@@ -16,6 +16,7 @@ import (
 type Config struct {
 	KeySeed  string
 	AuthFile string
+	AuthJson string
 	Proxy    string
 }
 
@@ -47,6 +48,13 @@ func NewServer(config *Config) (*Server, error) {
 	//parse users, if provided
 	if config.AuthFile != "" {
 		users, err := chshare.ParseUsers(config.AuthFile)
+		if err != nil {
+			return nil, err
+		}
+		s.Users = users
+	}
+	if config.AuthJson != "" {
+		users, err := chshare.ParseUsersJson(config.AuthJson)
 		if err != nil {
 			return nil, err
 		}

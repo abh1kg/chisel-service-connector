@@ -103,6 +103,7 @@ func server(args []string) {
   port := flags.String("port", "", "")
   key := flags.String("key", "", "")
   authfile := flags.String("authfile", "", "")
+  authjson := flags.String("authjson", "", "")
   proxy := flags.String("proxy", "", "")
   verbose := flags.Bool("v", false, "")
 
@@ -129,6 +130,7 @@ func server(args []string) {
   s, err := chserver.NewServer(&chserver.Config{
     KeySeed:  *key,
     AuthFile: *authfile,
+    AuthJson: *authjson,
     Proxy:    *proxy,
   })
   if err != nil {

@@ -66,3 +66,30 @@ func ParseUsers(authfile string) (Users, error) {
 	}
 	return users, nil
 }
+
+func ParseUsersJson(authjson string) (Users, error) {
+
+	var raw map[string][]string
+	err := json.Unmarshal([]byte(authjson), &raw)
+	if err != nil {
+		return nil, errors.New("Invalid JSON: " + err.Error())
+	}
+
+	users := Users{}
+	for auth, remotes := range raw {
+		u := &User{}
+		u.Name, u.Pass = ParseAuth(auth)
+		if u.Name == "" {
+			return nil, errors.New("Invalid user:pass string")
+		}
+		for _, r := range remotes {
+			re, err := regexp.Compile(r)
+			if err != nil {
+				return nil, errors.New("Invalid address regex")
+			}
+			u.Addrs = append(u.Addrs, re)
+		}
+		users[u.Name] = u
+	}
+	return users, nil
+}
