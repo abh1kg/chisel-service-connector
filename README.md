@@ -28,7 +28,7 @@ your application.
 ```
   echo '{ "myuser:mysecret": [""] }' > auth.json
 ```
-  Note for Windows Command Prompt users: Remove the single quotes when you run this in a dos shell:
+  Note for Windows Command Prompt users: Remove the single quotes when you run this in a DOS shell:
 ```
   echo { "myuser:mysecret": [""] } > auth.json
 ```
