@@ -17,7 +17,7 @@ You might also have a service created to be used a backing service `my-backing-s
 for application(s) running on CF. The backing service can be connected via TCP to
 your application.
 
-* clone the chisel repository to your local workstation
+* Clone the repository to your local workstation
 ```
   git clone https://github.com/abh1kg/chisel-service-connector.git
   cd chisel-service-connector
